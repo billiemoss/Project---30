@@ -33,15 +33,14 @@ def stations_by_distance(stations, p):
 
 def stations_within_radius(stations, x, r):
 
-   stations_within_range = []
+   stations_within_range_unsorted = []
    #calculate haversine distance to each object station in stations
    for station in stations:
       distance = haversine(station.coord, x)
       if distance <= r:
-         stations_within_range.append(station.name)
-   #sort stations within in range into alphabetical order
-   stations_within_range_sorted = sorted(stations_within_range)
-   return stations_within_range_sorted
+         stations_within_range_unsorted.append(station.name)
+   
+   return stations_within_range_unsorted
 
       
           
