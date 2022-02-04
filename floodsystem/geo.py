@@ -9,14 +9,39 @@ geographical data.
 from .utils import sorted_by_key  # noqa
 from haversine import haversine
 
+#Task 1B
 
+#This function will return a list of (station name, town, distance) tuples
+#Required input is stations (a list of the Monitoring Station objects), and the coordinate p(latitude, longitude)   
 def stations_by_distance(stations, p):
    
 
    station_distance = []
+   #calculate and append haversine distance to each object station in stations
    for station in stations:
       distance = haversine(station.coord, p)
       station_distance.append((station.name, station.town, distance))
-   #sort by distance
+   #sort stations by distance from coordinate p
    station_distance = sorted_by_key(station_distance, 2)
    return station_distance
+
+
+#Task 1C
+
+#This function will return a list of Station Names within a radius r of a coordinate x
+#Required input is stations (a list of the Monitoring Station objects), and  the coordinate x(latitude, longitude), and the desired radius r(float)
+
+def stations_within_radius(stations, x, r):
+
+   stations_within_range = []
+   #calculate haversine distance to each object station in stations
+   for station in stations:
+      distance = haversine(station.coord, x)
+      if distance <= r:
+         stations_within_range.append(station.name)
+   #sort stations within in range into alphabetical order
+   stations_within_range_sorted = sorted(stations_within_range)
+   return stations_within_range_sorted
+
+      
+          

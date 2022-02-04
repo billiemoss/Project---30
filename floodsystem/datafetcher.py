@@ -21,6 +21,7 @@ def fetch(url):
     return data
 
 
+
 def dump(data, filename):
     """Save JSON object to file"""
     f = open(filename, 'w')
@@ -138,3 +139,4 @@ def fetch_measure_levels(measure_id, dt):
         levels.append(measure['value'])
 
     return dates, levels
+
