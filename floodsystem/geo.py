@@ -6,6 +6,7 @@ geographical data.
 
 """
 
+
 from .utils import sorted_by_key  # noqa
 from haversine import haversine
 
@@ -42,5 +43,55 @@ def stations_within_radius(stations, x, r):
    
    return stations_within_range_unsorted
 
-      
-          
+
+
+#Task 1E
+
+#This function will return a list of tuples of form (river name, number of stations)
+#The N rivers with the greatest number of stations will be included - as well as overflow for multiple stations with the same number at N
+
+#Required input is stations (a list of the Monitioring Station objects), and the number of stations to be included, N - remember overflow case
+
+def rivers_by_station_number(stations, N):
+
+  
+   list_of_river_names = []
+   for station in stations:
+      river_name = station.river
+      list_of_river_names.append(river_name)
+   
+   river_number_of_stations = []
+   for i in list_of_river_names:
+      river_number_of_stations.append((i, list_of_river_names.count(i)))
+
+   river_number_of_stations_unique = []
+   for i in river_number_of_stations:
+      if i not in river_number_of_stations_unique:
+         river_number_of_stations_unique.append(i)
+
+
+   rivers_sorted_by_station_number_unclipped = sorted_by_key(river_number_of_stations_unique, 1)
+
+ 
+   number_of_stations_list = []
+  
+
+   for i in rivers_sorted_by_station_number_unclipped:
+      number_of_stations = i[1]
+      number_of_stations_list.append(number_of_stations)
+
+
+
+   qualifying_number_of_stations = number_of_stations_list[-N]
+
+
+   rivers_sorted_by_station_number_clipped = []
+   for i in rivers_sorted_by_station_number_unclipped:
+      if i[1] >= qualifying_number_of_stations:
+         rivers_sorted_by_station_number_clipped.append(i)
+
+
+
+   return rivers_sorted_by_station_number_clipped
+
+
