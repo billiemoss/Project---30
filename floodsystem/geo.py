@@ -54,20 +54,27 @@ def stations_within_radius(stations, x, r):
 
 def rivers_by_station_number(stations, N):
 
+#Create a list of all the river names, with repeated entries for rivers with multiple stations
   
    list_of_river_names = []
    for station in stations:
       river_name = station.river
       list_of_river_names.append(river_name)
    
+#Turn this list into a list of tuples of the form (river name, number of stations on that river)
+
    river_number_of_stations = []
    for i in list_of_river_names:
       river_number_of_stations.append((i, list_of_river_names.count(i)))
+
+#Remove duplicates from the above list of tuples
 
    river_number_of_stations_unique = []
    for i in river_number_of_stations:
       if i not in river_number_of_stations_unique:
          river_number_of_stations_unique.append(i)
+
+#Sort this list by the number of stations
 
 
    rivers_sorted_by_station_number_unclipped = sorted_by_key(river_number_of_stations_unique, 1)
@@ -75,6 +82,8 @@ def rivers_by_station_number(stations, N):
  
    number_of_stations_list = []
   
+
+  #Remove entries in the list which have fewer stations than the Nth highest entry
 
    for i in rivers_sorted_by_station_number_unclipped:
       number_of_stations = i[1]
