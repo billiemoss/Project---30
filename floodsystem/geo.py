@@ -83,7 +83,7 @@ def rivers_by_station_number(stations, N):
    number_of_stations_list = []
   
 
-  #Remove entries in the list which have fewer stations than the Nth highest entry
+  #Remove the entries in the list which have fewer stations than the Nth highest entry
 
    for i in rivers_sorted_by_station_number_unclipped:
       number_of_stations = i[1]
