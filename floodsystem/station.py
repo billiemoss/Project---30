@@ -41,11 +41,18 @@ class MonitoringStation:
 
     #Task 1F - method to check high low range data for consistency
     def typical_range_consistent(self):
-        range = {}
-        range[self.typical_range[0:]] = self.typical_range[:0]
-        if range[:0] < range[0:]:
-            return False
-        if self.typical_range == None:
+        def tuple_in_recursive(range, item):
+                for element in range:
+                    if type(element) == tuple:
+                        if tuple_in_recursive(element, item):
+                            return True
+                    else:
+                        if element == item:
+                            return True
+                return False
+        range = self.typical_range
+        tuple_range = tuple_in_recursive(range, item)
+        if range == None:
             return False
         else:
             return True
@@ -53,11 +60,10 @@ class MonitoringStation:
 
 def inconsistent_typical_range_stations(stations):
     inconsistent_stations = []
-    for station in stations:
-        if MonitoringStation.typical_range_consistent(station) == False:
+    for station in list(stations):
+        if list(MonitoringStation.typical_range_consistent(stations)) == False:
              inconsistent_stations.append(station)
     return inconsistent_stations
 
-    
 
 
