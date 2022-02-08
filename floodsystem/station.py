@@ -6,7 +6,6 @@ for manipulating/modifying station data
 
 """
 
-
 class MonitoringStation:
     """This class represents a river level monitoring station"""
 
@@ -41,29 +40,25 @@ class MonitoringStation:
 
     #Task 1F - method to check high low range data for consistency
     def typical_range_consistent(self):
-        def tuple_in_recursive(range, item):
-                for element in range:
-                    if type(element) == tuple:
-                        if tuple_in_recursive(element, item):
-                            return True
-                    else:
-                        if element == item:
-                            return True
-                return False
-        range = self.typical_range
-        tuple_range = tuple_in_recursive(range, item)
-        if range == None:
+        if self.typical_range == None:
             return False
+        low = float(self.typical_range[0])
+        high =float(self.typical_range[1])
+        if high < low:
+            return False 
         else:
             return True
 
+#given a list of station objects, returns a list of stations that have inconsistent data
 
 def inconsistent_typical_range_stations(stations):
-    inconsistent_stations = []
-    for station in list(stations):
-        if list(MonitoringStation.typical_range_consistent(stations)) == False:
-             inconsistent_stations.append(station)
-    return inconsistent_stations
+    
+    inconsistent_data = []
+    for station in stations:
+        if station.typical_range_consistent() == False:
+          inconsistent_data.append(station.name)
+    return inconsistent_data
 
 
 
+# MonitoringStation.typical_range_consistent

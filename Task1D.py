@@ -7,10 +7,12 @@ stations = build_station_list()
 station_rivers = rivers_with_station(stations)
 number_of_stations = len(station_rivers)
 print ("The number of rivers with monitoring stations: ", number_of_stations)
+assert number_of_stations != 0
 
 #first ten rivers with stations in alphabetical order
 ordered_rivers = sorted(rivers_with_station(stations))
 print("First 10: ", ordered_rivers[0:10])
+assert len(ordered_rivers) == len(station_rivers)
 
 
 #stations on River Aire in alphabetical order

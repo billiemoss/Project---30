@@ -4,6 +4,7 @@
 from floodsystem.geo import stations_by_distance, stations_within_radius, rivers_with_station, stations_by_river, rivers_by_station_number 
 from floodsystem.stationdata import build_station_list
 
+
 #Task 1B Test
 
 
@@ -31,3 +32,14 @@ def test_rivers_by_station_number():
     assert len(number_of_rivers_output) >= 4
 
 #Task 1D Test
+
+def test_rivers_with_station():
+    stations = build_station_list()
+    station_rivers = rivers_with_station(stations)
+    assert len(station_rivers) > 0
+
+def test_stations_by_river():
+    stations = build_station_list()
+    stations_on_river = stations_by_river(stations)
+    assert "Addlestone Bourne" in stations_on_river
+
