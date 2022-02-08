@@ -47,6 +47,7 @@ def stations_within_radius(stations, x, r):
 #Task 1D
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #a function which return the names of rivers with a monitoring station
 def rivers_with_station(stations):
    rivers = {}
@@ -65,6 +66,8 @@ def stations_by_river(stations):
          rivers[item.river] = [item.name]
    return rivers
 
+=======
+>>>>>>> 7a1b0ac3965a6c5cf6587e238cd85f203b437f1b
 =======
 >>>>>>> 7a1b0ac3965a6c5cf6587e238cd85f203b437f1b
 
