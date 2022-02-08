@@ -44,23 +44,22 @@ def stations_within_radius(stations, x, r):
    return stations_within_range_unsorted
 
 #Task 1D
-
+rivers = set()
 #a function which return the names of rivers with a monitoring station
 def rivers_with_station(stations):
-   rivers = {}
-   for i in len(stations):
-      rivers.append(stations[i])
+   for station in stations:
+      rivers.add(station.river)
    return rivers
 
 #a function that returns a dictionary that maps river names to a list on station objects on the river
 def stations_by_river(stations):
    rivers = {}
-   for item in stations:
-      if item.river in rivers:
-         rivers[item.river].append(item.name)
-         rivers[item.river].sort()
+   for station in stations:
+      if station.river in rivers:
+         rivers[station.river].append(station.name)
+         rivers[station.river].sort()
       else:
-         rivers[item.river] = [item.name]
+         rivers[station.river] = [station.name]
    return rivers
 
 
