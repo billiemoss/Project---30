@@ -1,14 +1,15 @@
 # Copyright (C) 2018 Garth N. Wells
 #
 # SPDX-License-Identifier: MIT
+
 """This module contains a collection of functions related to
 geographical data.
 
 """
 
-
+from  haversine import haversine
 from .utils import sorted_by_key  # noqa
-from haversine import haversine
+
 
 #Task 1B
 
@@ -42,6 +43,26 @@ def stations_within_radius(stations, x, r):
          stations_within_range_unsorted.append(station.name)
    
    return stations_within_range_unsorted
+
+#Task 1D
+
+#a function which return the names of rivers with a monitoring station
+def rivers_with_station(stations):
+   rivers = {}
+   for i in len(stations):
+      rivers.append(stations[i])
+   return rivers
+
+#a function that returns a dictionary that maps river names to a list on station objects on the river
+def stations_by_river(stations):
+   rivers = {}
+   for item in stations:
+      if item.river in rivers:
+         rivers[item.river].append(item.name)
+         rivers[item.river].sort()
+      else:
+         rivers[item.river] = [item.name]
+   return rivers
 
 
 
