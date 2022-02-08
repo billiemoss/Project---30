@@ -41,16 +41,21 @@ class MonitoringStation:
 
     #Task 1F - method to check high low range data for consistency
     def typical_range_consistent(self):
-        if self.typical_range <= 0:
-            return True
-        else:
+        range = {}
+        range[self.typical_range[0:]] = self.typical_range[:0]
+        if range[:0] < range[0:]:
             return False
+        if self.typical_range == None:
+            return False
+        else:
+            return True
+
 
 def inconsistent_typical_range_stations(stations):
-    inconsistent_stations = ()
-    for i in MonitoringStation.typical_range_consistent:
-        if MonitoringStation.typical_range_consistent() == True:
-          inconsistent_stations.append(MonitoringStation.typical_range_consistent(i))
+    inconsistent_stations = []
+    for station in stations:
+        if MonitoringStation.typical_range_consistent(station) == False:
+             inconsistent_stations.append(station)
     return inconsistent_stations
 
     
