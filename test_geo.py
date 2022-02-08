@@ -1,6 +1,5 @@
 
-from .utils import sorted_by_key  # noqa
-from  haversine import haversine
+
 
 from floodsystem.geo import stations_by_distance, stations_within_radius, rivers_with_station, stations_by_river, rivers_by_station_number 
 from floodsystem.stationdata import build_station_list
@@ -23,10 +22,12 @@ def test_stations_within_radius():
     assert len(stations_in_range)>0
 
 
-#Task 1D Test
+#Task 1E Test
 
 def test_rivers_by_station_number():
     stations = build_station_list()
     number_of_rivers_output = rivers_by_station_number(stations, 4)
 
     assert len(number_of_rivers_output) >= 4
+
+#Task 1D Test
