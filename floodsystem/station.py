@@ -5,6 +5,7 @@
 for manipulating/modifying station data
 
 """
+from .datafetcher import fetch_latest_water_level_data
 
 class MonitoringStation:
     """This class represents a river level monitoring station"""
@@ -48,6 +49,25 @@ class MonitoringStation:
             return False 
         else:
             return True
+    
+    #Task 2B - method to return latest water level as a fraction of the typical range
+    def relative_water_level(self):
+
+        current_level = fetch_latest_water_level_data()
+        low = float(self.typical_range[0])
+        high =float(self.typical_range[1])
+        span = high - low
+        level_above_low = current_level - low
+        fraction = level_above_low / span
+        if self.typical_range_consistent() == False:
+            return None
+        elif FileExistsError:
+             return None
+        else:
+            return fraction
+
+    
+
 
 #given a list of station objects, returns a list of stations that have inconsistent data
 
@@ -62,3 +82,4 @@ def inconsistent_typical_range_stations(stations):
 
 
 # MonitoringStation.typical_range_consistent
+
