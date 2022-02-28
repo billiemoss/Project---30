@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 
+from numpy import polyfit
+
 def plot_water_levels(station, dates, levels):
     t = []
     l = []  
@@ -22,9 +24,25 @@ def plot_water_levels(station, dates, levels):
     plt.tight_layout()
     #display plot
     plt.show()
-    
+
 
 
 def plot_water_level_with_fit(station, dates, levels, p):
-    print()
-
+    t = []
+    l = []  
+    for level in zip(levels):
+        l.append(level)
+    x = polyfit(dates, levels, p)
+    for i in x:
+        t.append(x)
+    #plots the data
+    plt.plot(t, l)
+    #adds axis labels
+    plt.xlabel('polyfit')
+    plt.ylabel('water level (m)')
+    #adds plot title
+    plt.title(station)
+    #makes sure plot doesnt cut off date labels
+    plt.tight_layout()
+    #display plot
+    plt.show()
