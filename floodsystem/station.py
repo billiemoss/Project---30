@@ -52,19 +52,10 @@ class MonitoringStation:
     
     #Task 2B - method to return latest water level as a fraction of the typical range
     def relative_water_level(self):
-
-        current_level = fetch_latest_water_level_data()
-        low = float(self.typical_range[0])
-        high =float(self.typical_range[1])
-        span = high - low
-        level_above_low = current_level - low
-        fraction = level_above_low / span
-        if self.typical_range_consistent() == False:
-            return None
-        elif FileExistsError:
-             return None
+        if self.typical_range_consistent() and self.latest_level != None:
+            return (self.latest_level - self.typical_range[0]) / (self.typical_range[1] - self.typical_range[0])
         else:
-            return fraction
+            return None
 
     
 
