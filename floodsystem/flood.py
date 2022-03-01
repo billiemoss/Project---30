@@ -19,5 +19,5 @@ def stations_levels_over_threshold(stations, tol):
 
 #Task 2C - function which returns ordered list of the N stations with highest relative level
 def stations_highest_rel_level(stations, N):
-    stations = [station for station in stations if station.relative_water_level() != None]
+    stations = [station for station in stations if station.relative_water_level() != None and station.relative_water_level() <= 50]
     return sorted(stations, key=lambda x: x.relative_water_level(), reverse=True)[:N]

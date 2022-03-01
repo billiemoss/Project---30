@@ -5,8 +5,9 @@ import matplotlib.dates
 
 
 def polyfit(dates, levels, p):
-    x = []
-    x.append(matplotlib.dates.date2num(dates))
-    p_coeff = np.polyfit(x - x[0], levels , p)
+    x = matplotlib.dates.date2num(dates)
+    x_shifted = [n-x[0] for n in x]
+    p_coeff = np.polyfit(x_shifted, levels , p)
     poly = np.poly1d(p_coeff)
-    return poly, x[0]
+
+    return poly(x_shifted), x_shifted
