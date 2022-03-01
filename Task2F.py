@@ -13,16 +13,12 @@ update_water_levels(stations)
 N = 5
 dt = 2
 
-at_risk_stations = stations_highest_rel_level(stations, N)
+for station in stations_highest_rel_level(stations, N):
+    dates, levels = fetch_measure_levels(station.measure_id, dt=timedelta(days=dt))
+    date_time_str = dates
+    datetime_obj = []
+    for i in range(len(date_time_str)):
+        datetime_obj.append(datetime. strftime(date_time_str[i], '%d/%m/%y %H:%M:%S'))
+        
+    print(plot_water_level_with_fit(station, datetime_obj, levels,4))
 
-station_list = []
-station_dates = []
-
-for station in at_risk_stations:
-    station_list.append(station.name)
-    
-for i in range(len(station_list)):
-    station_plot = station_list[i]
-    station_2 = at_risk_stations[i]
-    dates, levels = fetch_measure_levels(station_2.measure_id, dt=timedelta(days=dt))
-    plot_water_level_with_fit(station_plot, dates, levels, 4)
