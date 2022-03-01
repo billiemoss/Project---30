@@ -53,7 +53,7 @@ def create_test_stations(n):
         s = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
 
         #Checking station created correctly, matches with above test for creation of single station:
-        test_create_monitoring_station(s, s_id, m_id, label, coord, trange, river, town)
+        test_create_monitoring_station()
 
   
         stations.append(s) #Adding arbitrary station into a list
