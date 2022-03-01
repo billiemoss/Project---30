@@ -39,8 +39,9 @@ def plot_water_level_with_fit(station, dates, levels, p):
     t = []
     l = []  
     x, y = station.typical_range
-    a,b = polyfit(dates, levels, p)
-    print(a,b)
+    y= polyfit(dates, levels, p)
+    a = y[0]
+    b = y[1]
     for date, level in zip(dates,levels):
         t.append(date)
         l.append(level)
@@ -52,6 +53,8 @@ def plot_water_level_with_fit(station, dates, levels, p):
         plt.plot(t, l)
         plt.plot([t[0],t[-1]], [x,x])
         plt.plot([t[0],t[-1]], [y,y])
+        x1 = np.linspace(t[0], t[-1], 30)
+        plt.plot(x1, a(x1))
         plt.gcf().autofmt_xdate()
         #adds axis labels
         plt.xlabel('date')
