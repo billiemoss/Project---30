@@ -19,6 +19,9 @@ for station in stations_highest_rel_level(stations, N):
     datetime_obj = []
     for i in range(len(date_time_str)):
         datetime_obj.append(datetime. strftime(date_time_str[i], '%d/%m/%y %H:%M:%S'))
-        
-    print(plot_water_level_with_fit(station, datetime_obj, levels,4))
-
+try1 = dates
+try2 = []
+for date in dates:
+    if date != None:
+        try2.append(date)
+    print(plot_water_level_with_fit(station, try2, levels,4))
