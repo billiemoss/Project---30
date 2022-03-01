@@ -3,12 +3,15 @@ from datetime import datetime, timedelta
 from floodsystem.stationdata import build_station_list
 from numpy import polyfit
 import numpy as np
+from floodsystem.datafetcher import fetch_measure_levels
 
 
 def plot_water_levels(station, dates, levels):
     t = []
     l = []  
+    dt = 10
     x, y = station.typical_range
+    dates, levels = fetch_measure_levels(station.measure_id, dt=timedelta(days=dt))
     for date, level in zip(dates,levels):
         t.append(date)
         l.append(level)
