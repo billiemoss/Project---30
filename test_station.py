@@ -47,7 +47,7 @@ def create_test_stations(n):
         m_id = "m-id-" + str(i)
         label = "station" + str(i)
         coord = (i*1.5, i*1.5)
-        trange = (6, 35)
+        trange = (0, 100)
         river = "River X"
         town = "My Town"
         s = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
@@ -62,9 +62,11 @@ def create_test_stations(n):
 
 
 station = create_test_stations(1)[0]
-def test_relative_water_level(station):
+def test_relative_water_level():
+    
+    station.latest_level = 10
     
 
-    station.latest_level = 10
+    assert station.relative_water_level() == 0.1
 
-    assert station.relative_water_level() == 0.25
+    #asserts that output of relative_water_level gives expected result when latest level = 10, range 0 to 100
