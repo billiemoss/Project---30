@@ -29,9 +29,13 @@ def test_create_monitoring_station():
     assert s.river == river
     assert s.town == town
 
+<<<<<<< HEAD
     
 
     
+=======
+
+>>>>>>> ad05e60aa8428c79a912b296b5ac40fae74b6df5
 def test_inconsistent_typical_range_stations():
     stations = build_station_list()
     inconsistent_stations = inconsistent_typical_range_stations(stations)
