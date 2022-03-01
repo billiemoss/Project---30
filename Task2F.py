@@ -7,21 +7,18 @@ from floodsystem.plot import plot_water_levels
 from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.flood import stations_highest_rel_level
 
-stations = build_station_list()
-update_water_levels(stations)
+def run():
+    stations = build_station_list()
+    update_water_levels(stations)
 
-N = 5
-dt = 2
+    N = 5
+    dt = 2
+    p = 4
+    highest_rel = stations_highest_rel_level(stations, N)
+    for station in highest_rel:
+        dates, levels = fetch_measure_levels(station.measure_id, dt=timedelta(days=dt))
+        print(plot_water_level_with_fit(station, dates, levels, p))
 
-for station in stations_highest_rel_level(stations, N):
-    dates, levels = fetch_measure_levels(station.measure_id, dt=timedelta(days=dt))
-    date_time_str = dates
-    datetime_obj = []
-    for i in range(len(date_time_str)):
-        datetime_obj.append(datetime. strftime(date_time_str[i], '%d/%m/%y %H:%M:%S'))
-try1 = dates
-try2 = []
-for date in dates:
-    if date != None:
-        try2.append(date)
-    print(plot_water_level_with_fit(station, try2, levels,4))
+if __name__ == "__main__":
+    print("***Task 2F***")
+    run()

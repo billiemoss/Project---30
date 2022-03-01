@@ -1,8 +1,10 @@
 import matplotlib.pyplot as plt
+import matplotlib.dates
 from datetime import datetime, timedelta
 from floodsystem.stationdata import build_station_list
 from numpy import polyfit
 import numpy as np
+from floodsystem.analysis import polyfit
 from floodsystem.datafetcher import fetch_measure_levels
 
 
@@ -23,7 +25,6 @@ def plot_water_levels(station, dates, levels):
         plt.plot(t, l)
         plt.plot([t[0],t[-1]], [x,x])
         plt.plot([t[0],t[-1]], [y,y])
-        plt.gcf().autofmt_xdate()
         #adds axis labels
         plt.xlabel('date')
         plt.ylabel('water level (m)')
@@ -41,10 +42,18 @@ def plot_water_levels(station, dates, levels):
 def plot_water_level_with_fit(station, dates, levels, p):
     t = []
     l = []  
+    dt = 2
+    try:
+        best_fit_poly, d0 = polyfit(dates, levels, p)
+    except:
+        pass
+    else: 
+        a = matplotlib.dates.date2num(dates) - d0
+        plt.plot(dates, best_fit_poly(a))
+
     x, y = station.typical_range
-    y= polyfit(dates, levels, p)
-    a = y[0]
-    b = y[1]
+    dates, levels = fetch_measure_levels(station.measure_id, dt=timedelta(days=dt))
+    w = polyfit(dates, levels, p)
     for date, level in zip(dates,levels):
         t.append(date)
         l.append(level)
@@ -58,7 +67,6 @@ def plot_water_level_with_fit(station, dates, levels, p):
         plt.plot([t[0],t[-1]], [y,y])
         x1 = np.linspace(t[0], t[-1], 30)
         plt.plot(x1, a(x1))
-        plt.gcf().autofmt_xdate()
         #adds axis labels
         plt.xlabel('date')
         plt.ylabel('water level (m)')
@@ -66,6 +74,7 @@ def plot_water_level_with_fit(station, dates, levels, p):
         plt.xticks(rotation=45)
         #adds plot title
         plt.title(station.name)
+        plt.legend()
         #makes sure plot doesnt cut off date labels
         plt.tight_layout()
         #display plot
